@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import heroImage from "../assets/Hero.jpg";
+import heroImage from "../assets/hero.jpg";
 import popupImage from "../assets/Popup.jpg";
 
 const Hero: React.FC = () => {
@@ -28,20 +28,34 @@ const Hero: React.FC = () => {
             {/* LEFT: TEXT */}
             <div>
               <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
-                Lorem Ipsum Dolor Sit Amet
+              Meeny’s Kitchen & Grill
               </h1>
 
               <p className="mt-4 max-w-xl text-lg text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Introducing Meeny’s — where authenticity meets flavour! 🍲
+              A true Blasian fusion of Caribbean spice and Asian soul, crafted with love and passion.
+              Follow us on our journey as we bring the taste of home-cooked goodness to your plate.
               </p>
 
               <button
-                onClick={() => setIsModalOpen(true)}
-                className="mt-8 inline-flex items-center justify-center rounded-md bg-green-600 px-8 py-3 text-base font-semibold text-white transition-colors hover:bg-green-700"
+               onClick={() => setIsModalOpen(true)}
+                className="group mt-8 inline-flex items-center justify-center gap-3 rounded-md bg-green-600 px-8 py-3 text-base font-semibold text-white transition-colors hover:bg-green-700"
               >
-                Order Now
+              <span>Order Now</span>
+              <svg
+                className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+              <path d="M5 12h14" />
+              <path d="M13 5l7 7-7 7" />
+              </svg>
               </button>
+
             </div>
 
             {/* RIGHT: IMAGE */}

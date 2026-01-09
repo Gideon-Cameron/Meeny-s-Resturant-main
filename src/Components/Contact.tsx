@@ -5,7 +5,7 @@ const Contact: React.FC = () => {
     <section className="w-full bg-gray-900 text-white">
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 text-center md:grid-cols-2 md:text-left">
-
+          
           {/* LEFT: CONTACT INFO */}
           <div>
             <h2 className="text-4xl font-extrabold">
@@ -13,29 +13,25 @@ const Contact: React.FC = () => {
             </h2>
 
             <p className="mt-4 max-w-md text-lg text-gray-300">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-              Reach out for orders, questions, or collaborations.
+              Questions, orders, or just saying hi — feel free to reach out!
             </p>
 
             <div className="mt-8 space-y-4 text-lg">
               <p>
-                <span className="font-semibold text-white">Email:</span>{" "}
+                <span className="font-semibold text-white">Phone:</span>{" "}
                 <a
-                  href="mailto:Unknownfornow@gmail.com"
+                  href="tel:07367681747"
                   className="text-yellow-400 hover:underline"
                 >
-                  Unknownfornow@gmail.com
+                  07367 681747
                 </a>
               </p>
 
               <p>
-                <span className="font-semibold text-white">Phone:</span>{" "}
-                <a
-                  href="tel:0870166473"
-                  className="text-yellow-400 hover:underline"
-                >
-                  0870166473
-                </a>
+                <span className="font-semibold text-white">Address:</span>{" "}
+                <span className="text-gray-300">
+                  Northampton, NN2 7PW
+                </span>
               </p>
             </div>
           </div>
@@ -47,25 +43,12 @@ const Contact: React.FC = () => {
             </h3>
 
             <div className="mt-6 flex gap-6">
-              {/* Facebook */}
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="rounded-full bg-gray-800 p-3 transition-colors hover:bg-yellow-500"
-              >
-                <svg
-                  className="h-6 w-6"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2v-2.3c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V12h2.6l-.4 3h-2.2v7A10 10 0 0 0 22 12z" />
-                </svg>
-              </a>
-
               {/* Instagram */}
               <a
-                href="#"
+                href="https://www.instagram.com/meenyskitchen?igsh=MWFwbDBxdzg4ZG90Mw%3D%3D&utm_source=qr"
                 aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="rounded-full bg-gray-800 p-3 transition-colors hover:bg-yellow-500"
               >
                 <svg
@@ -77,18 +60,20 @@ const Contact: React.FC = () => {
                 </svg>
               </a>
 
-              {/* Telegram */}
+              {/* Snapchat */}
               <a
-                href="#"
-                aria-label="Telegram"
+                href="https://snapchat.com/t/OmGdtl3k"
+                aria-label="Snapchat"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="rounded-full bg-gray-800 p-3 transition-colors hover:bg-yellow-500"
               >
                 <svg
                   className="h-6 w-6"
-                  fill="currentColor"
                   viewBox="0 0 24 24"
+                  fill="currentColor"
                 >
-                  <path d="M9.04 15.44 8.9 19.2c.4 0 .57-.17.78-.38l1.88-1.8 3.9 2.85c.72.4 1.24.2 1.42-.66l2.57-12.08c.24-1.1-.4-1.54-1.1-1.28L2.5 9.75c-1.08.42-1.06 1.02-.2 1.28l4.2 1.32L16.3 6.6c.46-.28.9-.12.55.16L9.04 15.44z" />
+                  <path d="M12 2c-4.5 0-8 3.7-8 8.3 0 2.6 1.5 5.1 3.7 6.6v.2c0 .6-.5.7-.8.8-.7.2-1.5.3-1.5.8 0 .6 1.2 1 2.2 1 .3 0 .5 0 .6.1.2.2.2.5.4.7.4.5 1.2.9 2.4.9s2-.3 2.5-.9c.2-.2.2-.5.4-.7 0-.1.2-.1.5-.1 1 0 2.2-.3 2.2-1 0-.5-.8-.6-1.5-.8-.3-.1-.8-.2-.8-.8v-.2c2.2-1.5 3.7-4 3.7-6.6C20 5.7 16.5 2 12 2z" />
                 </svg>
               </a>
             </div>
