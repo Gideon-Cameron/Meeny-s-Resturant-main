@@ -167,7 +167,7 @@ const Menu: React.FC = () => {
             </div>
           </div>
 
-          {/* DRINKS */}
+          {/* THE DRINKS */}
           <div className="mx-auto mt-20 max-w-md text-center">
             <h3 className="mb-6 text-2xl font-bold">Drinks</h3>
             <ul className="space-y-3 text-lg">
