@@ -1,31 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { boxes, mains, sides, drinks, MenuItem } from "../data/menu";
-
 import menuHero from "../assets/menu.jpg";
 
 const Menu: React.FC = () => {
   const location = useLocation();
+  const { addItem, isItemSelected, getItemCount } = useCart();
 
-  // Read order type from navigation state
   const orderType: "delivery" | "pickup" =
     location.state?.orderType ?? "delivery";
 
-  const { addItem, isItemSelected, getItemCount } = useCart();
+  const [showSuccess, setShowSuccess] = useState(false);
 
-  // 🔍 TEMP: verify flow
-  console.log("🧭 Order type:", orderType);
+  // ✅ Listen for successful order event
+  useEffect(() => {
+    const handleSuccess = () => {
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 3000);
+    };
+
+    window.addEventListener("order-success", handleSuccess);
+    return () =>
+      window.removeEventListener("order-success", handleSuccess);
+  }, []);
 
   const cardBase =
     "relative cursor-pointer overflow-hidden rounded-xl bg-white shadow-lg transition-all";
-  const selectedStyle =
-    "ring-4 ring-yellow-400 bg-yellow-50";
+  const selectedStyle = "ring-4 ring-yellow-400 bg-yellow-50";
 
-  const handleAdd = (item: MenuItem) => {
-    console.log("➕ Adding item to cart:", item);
-    addItem(item);
-  };
+  const handleAdd = (item: MenuItem) => addItem(item);
 
   const QuantityBadge = ({ count }: { count: number }) =>
     count > 0 ? (
@@ -36,6 +40,14 @@ const Menu: React.FC = () => {
 
   return (
     <main className="bg-neutral-50 text-gray-900">
+
+      {/* ✅ SUCCESS BANNER */}
+      {showSuccess && (
+        <div className="fixed top-0 z-50 w-full bg-green-600 text-white text-center py-3 font-semibold shadow-md">
+          ✅ Your order was sent successfully
+        </div>
+      )}
+
       {/* ================= HERO ================= */}
       <section className="relative h-[60vh] w-full">
         <img src={menuHero} alt="Menu" className="h-full w-full object-cover" />
@@ -81,13 +93,11 @@ const Menu: React.FC = () => {
 
                 <div className="p-6">
                   <h3 className="text-xl font-bold">{box.name}</h3>
-
                   <ul className="mt-4 space-y-1 text-gray-700">
                     {box.includes?.map((item) => (
                       <li key={item}>• {item}</li>
                     ))}
                   </ul>
-
                   <div className="mt-6 text-2xl font-extrabold text-yellow-600">
                     £{box.price}
                   </div>
@@ -106,65 +116,37 @@ const Menu: React.FC = () => {
           </h2>
 
           <div className="mt-16 grid grid-cols-1 gap-16 lg:grid-cols-2">
-            {/* MAINS */}
-            <div>
-              <h3 className="mb-6 text-2xl font-bold text-center">
-                Mains
-              </h3>
-              <ul className="space-y-3 text-lg">
-                {mains.map((item) => {
-                  const count = getItemCount(item.id);
-
-                  return (
-                    <li
-                      key={item.id}
-                      onClick={() => handleAdd(item)}
-                      className="flex cursor-pointer justify-between border-b border-white/20 pb-2 transition hover:bg-white/10 px-2 rounded"
-                    >
-                      <span>
-                        {item.name}
-                        {count > 0 && (
-                          <span className="ml-2 text-sm text-yellow-400">
-                            × {count}
+            {[{ title: "Mains", items: mains }, { title: "Sides", items: sides }].map(
+              ({ title, items }) => (
+                <div key={title}>
+                  <h3 className="mb-6 text-2xl font-bold text-center">
+                    {title}
+                  </h3>
+                  <ul className="space-y-3 text-lg">
+                    {items.map((item) => {
+                      const count = getItemCount(item.id);
+                      return (
+                        <li
+                          key={item.id}
+                          onClick={() => handleAdd(item)}
+                          className="flex cursor-pointer justify-between border-b border-white/20 pb-2 transition hover:bg-white/10 px-2 rounded"
+                        >
+                          <span>
+                            {item.name}
+                            {count > 0 && (
+                              <span className="ml-2 text-sm text-yellow-400">
+                                × {count}
+                              </span>
+                            )}
                           </span>
-                        )}
-                      </span>
-                      <span>£{item.price}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-
-            {/* SIDES */}
-            <div>
-              <h3 className="mb-6 text-2xl font-bold text-center">
-                Sides
-              </h3>
-              <ul className="space-y-3 text-lg">
-                {sides.map((item) => {
-                  const count = getItemCount(item.id);
-
-                  return (
-                    <li
-                      key={item.id}
-                      onClick={() => handleAdd(item)}
-                      className="flex cursor-pointer justify-between border-b border-white/20 pb-2 transition hover:bg-white/10 px-2 rounded"
-                    >
-                      <span>
-                        {item.name}
-                        {count > 0 && (
-                          <span className="ml-2 text-sm text-yellow-400">
-                            × {count}
-                          </span>
-                        )}
-                      </span>
-                      <span>£{item.price}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+                          <span>£{item.price}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )
+            )}
           </div>
 
           {/* DRINKS */}
@@ -173,7 +155,6 @@ const Menu: React.FC = () => {
             <ul className="space-y-3 text-lg">
               {drinks.map((item) => {
                 const count = getItemCount(item.id);
-
                 return (
                   <li
                     key={item.id}
